@@ -1,0 +1,7 @@
+babel.config.js
+metro.config.js
+app.config.js
+tsconfig.json
+.eslintrc.js
+.expo/
+.github/
