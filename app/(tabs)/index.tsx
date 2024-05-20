@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { type FC } from 'react';
 import CustomHeader from '@/components/CustomHeader/CustomHeader';
 import globalStyles, { horizontalPadding } from '@/constants/GlobalStyles';
 import { router } from 'expo-router';
 import typos from '@/constants/Typos';
+import CustomButton from '@/components/CustomButton/CustomButton';
 
 const HomeScreen: FC = () => {
   const handleOnPress = () => {
@@ -14,9 +15,9 @@ const HomeScreen: FC = () => {
     <View style={styles.mainContainer}>
       <CustomHeader title={'SpaceJapp'} />
       <Text style={typos.bodyOne}>Conocenos</Text>
-      <TouchableOpacity onPress={handleOnPress}>
-        <Text>Aprieta</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <CustomButton lable={'Nuevo viaje'} onPress={handleOnPress} />
+      </View>
     </View>
   );
 };
@@ -26,6 +27,12 @@ const styles = StyleSheet.create({
     ...globalStyles.mainContainer,
     paddingHorizontal: horizontalPadding,
     flex: 1,
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: 50,
+    flexDirection: 'column',
   },
 });
 
