@@ -1,4 +1,4 @@
-import { TouchableOpacity, Text, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 import type { FC } from 'react';
 import styles from './CustomButton.styles';
 
