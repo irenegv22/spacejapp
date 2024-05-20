@@ -8,7 +8,7 @@ import CustomButton from '@/components/CustomButton/CustomButton';
 
 const HomeScreen: FC = () => {
   const handleOnPress = () => {
-    router.push({ pathname: 'planetSelection' });
+    router.push({ pathname: 'tripReservation' });
   };
 
   return (

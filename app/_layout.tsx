@@ -34,7 +34,7 @@ export default function RootLayout() {
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
             <Stack.Screen name="+not-found" options={{ headerShown: false }} />
-            <Stack.Screen name="planetSelection" options={{ headerShown: false }} />
+            <Stack.Screen name="tripReservation" options={{ headerShown: false }} />
           </Stack>
         </ThemeProvider>
       </SafeAreaView>
