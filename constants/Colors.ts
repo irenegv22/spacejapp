@@ -2,6 +2,8 @@ enum Colors {
   /* Main */
   Main100 = '#4A428C',
   Main150 = '#6C66A1',
+  MainDisable = '#B1ADCB',
+
   /* Grey Scale */
   PureWhite = '#FFFFFF',
   Grey100 = '#F7FCF8',
