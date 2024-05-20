@@ -10,7 +10,11 @@ const styles = StyleSheet.create({
     margin: 8,
     alignItems: 'center',
     backgroundColor: Colors.PureBlack,
-    width: 120,
+    width: '100%',
+  },
+  cardContainer: {
+    padding: 8,
+    alignItems: 'center',
   },
   selectedCard: {
     borderColor: Colors.Success,
@@ -19,8 +23,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 75,
+    height: 75,
     borderRadius: 8,
     opacity: 0.5,
   },

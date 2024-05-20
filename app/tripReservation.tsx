@@ -54,6 +54,7 @@ const PlanetSelectionScreen: FC = () => {
           ))}
         </View>
         <View style={styles.formContainer}>
+          <Text style={styles.contentTitle}>Completa la información</Text>
           <View style={styles.formGroup}>
             <TextInput
               placeholder="Nombre"
@@ -101,6 +102,7 @@ const styles = StyleSheet.create({
   },
   contentTitle: {
     ...typos.bodyOne,
+    marginBottom: 8,
   },
   cardsContainer: {
     flexDirection: 'row',
@@ -116,7 +118,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Grey150,
     paddingHorizontal: 16,
     borderRadius: 8,
-    ...typos.bodyOne,
   },
 });
 

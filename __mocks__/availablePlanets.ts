@@ -15,7 +15,7 @@ export const planets = [
   },
   {
     id: '3',
-    name: 'Estación Intern.',
+    name: 'Estación Internacional',
     imageUrl: 'https://www.nasa.gov/wp-content/uploads/2023/02/International-Space-Station-in-2021.jpg',
     accessibilityLabel: 'International Station image',
   },
