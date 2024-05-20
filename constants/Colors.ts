@@ -14,6 +14,7 @@ enum Colors {
   Grey350 = '#565D57',
   Grey400 = '#2D2E2E',
   Black = '#302E35',
+  PureBlack = '#000000',
   /* Interaction Colors */
   Danger = '#C8102E',
   Success = '#55917F',
