@@ -4,8 +4,8 @@ export interface BookingInfo {
   travelerName: string;
   travelerSurame: string;
   travelerPhone: string;
-  //   bookingDate: Date;
-  //   tripDate: Date;
+  bookingDate: Date;
+  tripDate: Date;
   //   tripHour: Date;
   menuChoice: string;
   specialRequest?: string;

@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, TextInput, ScrollView, Platform } from 'react-native';
 import { useState, type FC } from 'react';
 import CustomHeader from '@/components/CustomHeader/CustomHeader';
 import globalStyles, { horizontalPadding } from '@/constants/GlobalStyles';
@@ -7,6 +7,7 @@ import typos from '@/constants/Typos';
 import { BookingInfo } from '@/types/bookingInfo';
 import PlanetCard from '@/components/PlanetCard/PlanetCard';
 import { planets } from '@/__mocks__/availablePlanets';
+import DatePicker from '@/components/DatePicker/DatePicker';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -14,8 +15,8 @@ const formInitialValue: BookingInfo = {
   travelerName: '',
   travelerSurame: '',
   travelerPhone: '',
-  // bookingDate: '',
-  // tripDate: '',
+  bookingDate: new Date(),
+  tripDate: new Date(),
   // tripHour: '',
   menuChoice: '',
   specialRequest: '',
@@ -25,7 +26,7 @@ const PlanetSelectionScreen: FC = () => {
   const [formData, setFormData] = useState<BookingInfo>(formInitialValue);
   const [selectedPlanetId, setSelectedPlanetId] = useState<string | null>(null);
 
-  const handleChange = (name: keyof BookingInfo, value: string) => {
+  const handleChange = (name: keyof BookingInfo, value: string | Date) => {
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
@@ -82,6 +83,12 @@ const PlanetSelectionScreen: FC = () => {
               onChange={event => handleChange('travelerPhone', event.nativeEvent.text)}
             />
           </View>
+          {/* TODO: Check if it works correcly on ios */}
+          {Platform.OS === 'android' && (
+            <View style={styles.formGroup}>
+              <DatePicker value={formData.tripDate} onChange={date => handleChange('tripDate', date)} />
+            </View>
+          )}
         </View>
       </ScrollView>
     </View>
@@ -101,7 +108,7 @@ const styles = StyleSheet.create({
     display: 'flex',
   },
   contentTitle: {
-    ...typos.bodyOne,
+    ...typos.bodyTwo,
     marginBottom: 8,
   },
   cardsContainer: {
@@ -118,6 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.Grey150,
     paddingHorizontal: 16,
     borderRadius: 8,
+    ...typos.bodyThree,
   },
 });
 
