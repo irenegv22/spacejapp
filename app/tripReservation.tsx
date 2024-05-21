@@ -91,7 +91,7 @@ const PlanetSelectionScreen: FC = () => {
             <CircleSelector options={tripHourOptions} onChange={value => handleChange('tripHour', value)} />
           </View>
         </View>
-        <View>
+        <View style={styles.buttonContainer}>
           <CustomButton
             lable="Reservar"
             onPress={() => {
@@ -135,6 +135,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 8,
     ...typos.bodyThree,
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    paddingBottom: 24,
+    flexDirection: 'column',
   },
 });
 
