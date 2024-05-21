@@ -6,7 +6,7 @@ export interface BookingInfo {
   travelerPhone: string;
   bookingDate: Date;
   tripDate: Date;
-  //   tripHour: Date;
+  tripHour: string;
   menuChoice: string;
   specialRequest?: string;
 }

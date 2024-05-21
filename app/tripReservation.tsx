@@ -8,6 +8,8 @@ import { BookingInfo } from '@/types/bookingInfo';
 import PlanetCard from '@/components/PlanetCard/PlanetCard';
 import { planets } from '@/__mocks__/availablePlanets';
 import DatePicker from '@/components/DatePicker/DatePicker';
+import CircleSelector from '@/components/Selector/CircleSelector';
+import { tripHourOptions } from '@/constants/constants';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -17,7 +19,7 @@ const formInitialValue: BookingInfo = {
   travelerPhone: '',
   bookingDate: new Date(),
   tripDate: new Date(),
-  // tripHour: '',
+  tripHour: '',
   menuChoice: '',
   specialRequest: '',
 };
@@ -89,6 +91,9 @@ const PlanetSelectionScreen: FC = () => {
               <DatePicker value={formData.tripDate} onChange={date => handleChange('tripDate', date)} />
             </View>
           )}
+          <View style={styles.formGroup}>
+            <CircleSelector options={tripHourOptions} onChange={value => handleChange('tripHour', value)} />
+          </View>
         </View>
       </ScrollView>
     </View>
