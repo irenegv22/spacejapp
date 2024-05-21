@@ -10,6 +10,7 @@ import { planets } from '@/__mocks__/availablePlanets';
 import DatePicker from '@/components/DatePicker/DatePicker';
 import CircleSelector from '@/components/Selector/CircleSelector';
 import { tripHourOptions } from '@/constants/constants';
+import CustomButton from '@/components/CustomButton/CustomButton';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -26,17 +27,12 @@ const formInitialValue: BookingInfo = {
 
 const PlanetSelectionScreen: FC = () => {
   const [formData, setFormData] = useState<BookingInfo>(formInitialValue);
-  const [selectedPlanetId, setSelectedPlanetId] = useState<string | null>(null);
 
   const handleChange = (name: keyof BookingInfo, value: string | Date) => {
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
     }));
-  };
-
-  const handleSelectPlanet = (id: string) => {
-    setSelectedPlanetId(id);
   };
 
   return (
@@ -50,8 +46,8 @@ const PlanetSelectionScreen: FC = () => {
               key={planet.id}
               name={planet.name}
               imageUrl={planet.imageUrl}
-              onSelect={() => handleSelectPlanet(planet.id)}
-              selected={planet.id === selectedPlanetId}
+              value={formData.planet}
+              onChange={name => handleChange('planet', name)}
               accessibilityLabel={planet.accessibilityLabel}
             />
           ))}
@@ -94,6 +90,14 @@ const PlanetSelectionScreen: FC = () => {
           <View style={styles.formGroup}>
             <CircleSelector options={tripHourOptions} onChange={value => handleChange('tripHour', value)} />
           </View>
+        </View>
+        <View>
+          <CustomButton
+            lable="Reservar"
+            onPress={() => {
+              console.log(formData);
+            }}
+          />
         </View>
       </ScrollView>
     </View>
