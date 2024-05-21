@@ -8,7 +8,7 @@ export const getTodayDay = () => {
 //Gets todays month
 export const getTodayMonth = () => {
   const today = new Date();
-  const month = today.getMonth() + 1;
+  const month = today.getMonth();
   return month;
 };
 
