@@ -59,6 +59,15 @@ const typos = StyleSheet.create({
     letterSpacing: 1,
     color: Colors.Black,
   },
+  lable: {
+    //fontFamily: 'SpaceMono', TODO: Think new font family
+    fontSize: 12,
+    fontWeight: '500',
+    fontStyle: 'normal',
+    lineHeight: 14,
+    letterSpacing: 1,
+    color: Colors.Grey400,
+  },
 });
 
 export default typos;

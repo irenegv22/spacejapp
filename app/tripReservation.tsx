@@ -55,6 +55,7 @@ const PlanetSelectionScreen: FC = () => {
         <View style={styles.formContainer}>
           <Text style={styles.contentTitle}>Completa la información</Text>
           <View style={styles.formGroup}>
+            <Text style={styles.lable}>Nombre:</Text>
             <TextInput
               placeholder="Nombre"
               style={styles.formInputText}
@@ -64,6 +65,7 @@ const PlanetSelectionScreen: FC = () => {
             />
           </View>
           <View style={styles.formGroup}>
+            <Text style={styles.lable}>Apellido:</Text>
             <TextInput
               placeholder="Apellido"
               style={styles.formInputText}
@@ -73,6 +75,7 @@ const PlanetSelectionScreen: FC = () => {
             />
           </View>
           <View style={styles.formGroup}>
+            <Text style={styles.lable}>Teléfono:</Text>
             <TextInput
               placeholder="Teléfono"
               style={styles.formInputText}
@@ -84,10 +87,12 @@ const PlanetSelectionScreen: FC = () => {
           {/* TODO: Check if it works correcly on ios */}
           {Platform.OS === 'android' && (
             <View style={styles.formGroup}>
+              <Text style={styles.lable}>Fecha del viaje:</Text>
               <DatePicker value={formData.tripDate} onChange={date => handleChange('tripDate', date)} />
             </View>
           )}
           <View style={styles.formGroup}>
+            <Text style={styles.lable}>Hora del viaje:</Text>
             <CircleSelector options={tripHourOptions} onChange={value => handleChange('tripHour', value)} />
           </View>
         </View>
@@ -124,6 +129,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
+  },
+  lable: {
+    paddingLeft: 4,
+    ...typos.lable,
   },
   formGroup: {
     marginBottom: 10,
