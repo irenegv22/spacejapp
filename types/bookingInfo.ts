@@ -7,6 +7,8 @@ export interface BookingInfo {
   bookingDate: Date;
   tripDate: Date;
   tripHour: string;
+  vegetarian: boolean;
+  glutenFree: boolean;
   menuChoice: string;
   specialRequest?: string;
 }

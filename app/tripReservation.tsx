@@ -11,6 +11,7 @@ import DatePicker from '@/components/DatePicker/DatePicker';
 import CircleSelector from '@/components/Selector/CircleSelector';
 import { tripHourOptions } from '@/constants/constants';
 import CustomButton from '@/components/CustomButton/CustomButton';
+import SwitchComponent from '@/components/Switch/SwitchComponent';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -21,6 +22,8 @@ const formInitialValue: BookingInfo = {
   bookingDate: new Date(),
   tripDate: new Date(),
   tripHour: '',
+  vegetarian: false,
+  glutenFree: false,
   menuChoice: '',
   specialRequest: '',
 };
@@ -28,7 +31,7 @@ const formInitialValue: BookingInfo = {
 const PlanetSelectionScreen: FC = () => {
   const [formData, setFormData] = useState<BookingInfo>(formInitialValue);
 
-  const handleChange = (name: keyof BookingInfo, value: string | Date) => {
+  const handleChange = (name: keyof BookingInfo, value: string | Date | boolean) => {
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
@@ -95,6 +98,21 @@ const PlanetSelectionScreen: FC = () => {
             <Text style={styles.lable}>Hora del viaje:</Text>
             <CircleSelector options={tripHourOptions} onChange={value => handleChange('tripHour', value)} />
           </View>
+          <View style={styles.formGroup}>
+            <Text style={styles.lable}>Dietas especiales:</Text>
+            <View style={styles.switchContainer}>
+              <SwitchComponent
+                isEnabled={formData.vegetarian}
+                toggleSwitch={event => handleChange('vegetarian', event)}
+                lableText="Vegetariana"
+              />
+              <SwitchComponent
+                isEnabled={formData.glutenFree}
+                toggleSwitch={event => handleChange('glutenFree', event)}
+                lableText="Sin gluten"
+              />
+            </View>
+          </View>
         </View>
         <View style={styles.buttonContainer}>
           <CustomButton
@@ -144,6 +162,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     borderRadius: 8,
     ...typos.bodyThree,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 8,
   },
   buttonContainer: {
     flex: 1,
