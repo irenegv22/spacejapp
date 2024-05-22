@@ -12,6 +12,8 @@ import CircleSelector from '@/components/Selector/CircleSelector';
 import { tripHourOptions } from '@/constants/constants';
 import CustomButton from '@/components/CustomButton/CustomButton';
 import SwitchComponent from '@/components/Switch/SwitchComponent';
+import CustomModal from '@/components/CustomModal/CustomModal';
+import ModalHeader from '@/components/CustomHeader/ModalHeader';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -30,12 +32,25 @@ const formInitialValue: BookingInfo = {
 
 const PlanetSelectionScreen: FC = () => {
   const [formData, setFormData] = useState<BookingInfo>(formInitialValue);
+  const [showMenuModal, setShowMenuModal] = useState(false);
 
   const handleChange = (name: keyof BookingInfo, value: string | Date | boolean) => {
     setFormData(prevState => ({
       ...prevState,
       [name]: value,
     }));
+  };
+
+  const handleFinishReservation = () => {
+    if (formData.menuChoice === '') {
+      setShowMenuModal(true);
+      return;
+    }
+    console.log(formData);
+  };
+
+  const handleOnCloseModal = () => {
+    setShowMenuModal(false);
   };
 
   return (
@@ -115,14 +130,19 @@ const PlanetSelectionScreen: FC = () => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <CustomButton
-            lable="Reservar"
-            onPress={() => {
-              console.log(formData);
-            }}
-          />
+          <CustomButton lable="Reservar" onPress={handleFinishReservation} />
         </View>
       </ScrollView>
+      <CustomModal
+        isVisible={showMenuModal}
+        onClose={() => {
+          setShowMenuModal(false);
+        }}
+      >
+        <View style={{ flex: 1 }}>
+          <ModalHeader title="Menú del Viaje" onClose={handleOnCloseModal} />
+        </View>
+      </CustomModal>
     </View>
   );
 };
