@@ -33,7 +33,6 @@ const formInitialValue: BookingInfo = {
   vegetarian: false,
   glutenFree: false,
   menuChoice: '',
-  specialRequest: '',
 };
 
 const PlanetSelectionScreen: FC = () => {

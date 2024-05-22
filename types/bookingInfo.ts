@@ -10,5 +10,4 @@ export interface BookingInfo {
   vegetarian: boolean;
   glutenFree: boolean;
   menuChoice: string;
-  specialRequest?: string;
 }
