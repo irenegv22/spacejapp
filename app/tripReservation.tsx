@@ -14,6 +14,11 @@ import CustomButton from '@/components/CustomButton/CustomButton';
 import SwitchComponent from '@/components/Switch/SwitchComponent';
 import CustomModal from '@/components/CustomModal/CustomModal';
 import ModalHeader from '@/components/CustomHeader/ModalHeader';
+import { systemErrorAlert } from '@/alers/systemErrorAlert';
+import { Paths, get } from '@/services/https';
+import { MenuResponse } from '@/types/httpsResponses';
+import { MenuInfo } from '@/types/menuInfo';
+import { selectMenuItems } from '@/utils/menu.utils';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -33,6 +38,7 @@ const formInitialValue: BookingInfo = {
 const PlanetSelectionScreen: FC = () => {
   const [formData, setFormData] = useState<BookingInfo>(formInitialValue);
   const [showMenuModal, setShowMenuModal] = useState(false);
+  const [menuToShow, setMenuToShow] = useState<MenuInfo[]>([]);
 
   const handleChange = (name: keyof BookingInfo, value: string | Date | boolean) => {
     setFormData(prevState => ({
@@ -41,8 +47,9 @@ const PlanetSelectionScreen: FC = () => {
     }));
   };
 
-  const handleFinishReservation = () => {
+  const handleFinishReservation = async () => {
     if (formData.menuChoice === '') {
+      await handleMenuItems();
       setShowMenuModal(true);
       return;
     }
@@ -51,6 +58,36 @@ const PlanetSelectionScreen: FC = () => {
 
   const handleOnCloseModal = () => {
     setShowMenuModal(false);
+  };
+
+  const getMenuDetails = async (mealName: string) => {
+    try {
+      const encoded = encodeURIComponent(mealName);
+      const pathParams = `?s=${encoded}`;
+      const path = `${Paths.Search}/${pathParams}`;
+      const menuFoodItem = await get(path);
+      if ((menuFoodItem as MenuResponse).meals && (menuFoodItem as MenuResponse).meals.length > 0) {
+        const meal = (menuFoodItem as MenuResponse).meals[0];
+        return {
+          id: meal.idMeal,
+          name: meal.strMeal,
+          imageUrl: meal.strMealThumb,
+        };
+      }
+      return null;
+    } catch {
+      return systemErrorAlert();
+    }
+  };
+
+  const handleMenuItems = async () => {
+    const menuItems = selectMenuItems(formData.vegetarian, formData.glutenFree);
+    menuItems.forEach(async menuItem => {
+      const menuDetails = await getMenuDetails(menuItem);
+      if (menuDetails) {
+        setMenuToShow(prevMenuToShow => [...prevMenuToShow, menuDetails]);
+      }
+    });
   };
 
   return (
@@ -141,6 +178,14 @@ const PlanetSelectionScreen: FC = () => {
       >
         <View style={{ flex: 1 }}>
           <ModalHeader title="Menú del Viaje" onClose={handleOnCloseModal} />
+          <View style={styles.modalContainer}>
+            {menuToShow.length > 0 &&
+              menuToShow.map((menuItem: MenuInfo, id: number) => (
+                <Text style={styles.lable} key={id}>
+                  {menuItem.name}
+                </Text>
+              ))}
+          </View>
         </View>
       </CustomModal>
     </View>
@@ -193,6 +238,13 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: 24,
     flexDirection: 'column',
+  },
+  modalContainer: {
+    paddingHorizontal: horizontalPadding,
+    paddingVertical: 10,
+    display: 'flex',
+    flex: 1,
+    gap: 10,
   },
 });
 
