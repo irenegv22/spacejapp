@@ -19,6 +19,7 @@ import { Paths, get } from '@/services/https';
 import { MenuResponse } from '@/types/httpsResponses';
 import { MenuInfo } from '@/types/menuInfo';
 import { selectMenuItems } from '@/utils/menu.utils';
+import MenuCard from '@/components/Menu Card/MenuCard';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -57,6 +58,12 @@ const PlanetSelectionScreen: FC = () => {
   };
 
   const handleOnCloseModal = () => {
+    const menuNotChooseData = {
+      ...formData,
+      menuChoice: '',
+    };
+    setFormData(menuNotChooseData);
+    setMenuToShow([]);
     setShowMenuModal(false);
   };
 
@@ -82,6 +89,7 @@ const PlanetSelectionScreen: FC = () => {
 
   const handleMenuItems = async () => {
     const menuItems = selectMenuItems(formData.vegetarian, formData.glutenFree);
+    setMenuToShow([]);
     menuItems.forEach(async menuItem => {
       const menuDetails = await getMenuDetails(menuItem);
       if (menuDetails) {
@@ -167,7 +175,10 @@ const PlanetSelectionScreen: FC = () => {
           </View>
         </View>
         <View style={styles.buttonContainer}>
-          <CustomButton lable="Reservar" onPress={handleFinishReservation} />
+          <CustomButton
+            lable={formData.menuChoice === '' ? 'Elegir Menú' : 'Reservar'}
+            onPress={handleFinishReservation}
+          />
         </View>
       </ScrollView>
       <CustomModal
@@ -179,12 +190,26 @@ const PlanetSelectionScreen: FC = () => {
         <View style={{ flex: 1 }}>
           <ModalHeader title="Menú del Viaje" onClose={handleOnCloseModal} />
           <View style={styles.modalContainer}>
-            {menuToShow.length > 0 &&
-              menuToShow.map((menuItem: MenuInfo, id: number) => (
-                <Text style={styles.lable} key={id}>
-                  {menuItem.name}
-                </Text>
-              ))}
+            <View style={styles.menuCardContainer}>
+              {menuToShow.length > 0 &&
+                menuToShow.map((menuItem: MenuInfo) => (
+                  <MenuCard
+                    key={menuItem.id}
+                    name={menuItem.name}
+                    imageUrl={menuItem.imageUrl}
+                    value={formData.menuChoice}
+                    onChange={foodMenu => handleChange('menuChoice', foodMenu)}
+                    accessibilityLabel={menuItem.name}
+                  />
+                ))}
+            </View>
+            <View style={styles.buttonContainer}>
+              <CustomButton
+                onPress={() => setShowMenuModal(false)}
+                lable="Aceptar"
+                disabled={formData.menuChoice === ''}
+              />
+            </View>
           </View>
         </View>
       </CustomModal>
@@ -215,6 +240,7 @@ const styles = StyleSheet.create({
   },
   lable: {
     paddingLeft: 4,
+    paddingBottom: 4,
     ...typos.lable,
   },
   formGroup: {
@@ -245,6 +271,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flex: 1,
     gap: 10,
+  },
+  menuCardContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 24,
+    paddingTop: 24,
   },
 });
 
