@@ -1,4 +1,6 @@
-export const planets = [
+import { PlanetInfo } from '@/types/planetInfo';
+
+export const planets: PlanetInfo[] = [
   {
     id: '1',
     name: 'Luna',
