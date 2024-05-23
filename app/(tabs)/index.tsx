@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { type FC } from 'react';
-import CustomHeader from '@/components/CustomHeader/CustomHeader';
 import globalStyles, { horizontalPadding } from '@/constants/GlobalStyles';
 import { router } from 'expo-router';
 import typos from '@/constants/Typos';
 import CustomButton from '@/components/CustomButton/CustomButton';
+import Colors from '@/constants/Colors';
 
 const HomeScreen: FC = () => {
   const handleOnPress = () => {
@@ -13,8 +13,12 @@ const HomeScreen: FC = () => {
 
   return (
     <View style={styles.mainContainer}>
-      <CustomHeader title={'SpaceJapp'} />
-      <Text style={typos.bodyOne}>Conocenos</Text>
+      <Text style={styles.titleText}>Bienvenido a SpaceJapp!</Text>
+      <Text style={styles.introductionText}>Embárcate en una nueva aventura reservando viajes al espacio </Text>
+      <Text style={styles.introductionText}>
+        Ya sea caminando sobre la Luna, explorando los misteriosos paisajes de Marte o experimentando la ingravitez en
+        la Estación Espacial, tenemos tu viaje perfecto!{' '}
+      </Text>
       <View style={styles.buttonContainer}>
         <CustomButton lable={'Nuevo viaje'} onPress={handleOnPress} />
       </View>
@@ -27,6 +31,18 @@ const styles = StyleSheet.create({
     ...globalStyles.mainContainer,
     paddingHorizontal: horizontalPadding,
     flex: 1,
+  },
+  titleText: {
+    ...typos.bodyOne,
+    marginBottom: 16,
+    color: Colors.Main100,
+    marginTop: 70,
+  },
+  introductionText: {
+    textAlign: 'left',
+    textAlignVertical: 'center',
+    paddingVertical: 16,
+    ...typos.bodyTwo,
   },
   buttonContainer: {
     flex: 1,
