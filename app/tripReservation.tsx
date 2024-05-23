@@ -122,9 +122,8 @@ const PlanetSelectionScreen: FC = () => {
           ))}
         </View>
         <View style={styles.formContainer}>
-          <Text style={styles.contentTitle}>Completa la información</Text>
           <View style={styles.formGroup}>
-            <Text style={styles.lable}>Nombre:</Text>
+            <Text style={styles.lable}>Nombre</Text>
             <TextInput
               placeholder="Nombre"
               style={styles.formInputText}
@@ -134,7 +133,7 @@ const PlanetSelectionScreen: FC = () => {
             />
           </View>
           <View style={styles.formGroup}>
-            <Text style={styles.lable}>Apellido:</Text>
+            <Text style={styles.lable}>Apellido</Text>
             <TextInput
               placeholder="Apellido"
               style={styles.formInputText}
@@ -144,7 +143,7 @@ const PlanetSelectionScreen: FC = () => {
             />
           </View>
           <View style={styles.formGroup}>
-            <Text style={styles.lable}>Teléfono:</Text>
+            <Text style={styles.lable}>Teléfono</Text>
             <TextInput
               placeholder="Teléfono"
               style={styles.formInputText}
@@ -156,16 +155,16 @@ const PlanetSelectionScreen: FC = () => {
           {/* TODO: Check if it works correcly on ios */}
           {Platform.OS === 'android' && (
             <View style={styles.formGroup}>
-              <Text style={styles.lable}>Fecha del viaje:</Text>
+              <Text style={styles.lable}>Fecha de salida</Text>
               <DatePicker value={formData.tripDate} onChange={date => handleChange('tripDate', date)} />
             </View>
           )}
           <View style={styles.formGroup}>
-            <Text style={styles.lable}>Hora del viaje:</Text>
+            <Text style={styles.lable}>Hora de salida</Text>
             <CircleSelector options={tripHourOptions} onChange={value => handleChange('tripHour', value)} />
           </View>
           <View style={styles.formGroup}>
-            <Text style={styles.lable}>Dietas especiales:</Text>
+            <Text style={styles.lable}>Dietas especiales</Text>
             <View style={styles.switchContainer}>
               <SwitchComponent
                 isEnabled={formData.vegetarian}
@@ -243,10 +242,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
+    paddingBottom: 16,
   },
   lable: {
-    paddingLeft: 4,
-    paddingBottom: 4,
+    paddingBottom: 8,
     ...typos.lable,
   },
   formGroup: {
