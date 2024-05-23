@@ -4,10 +4,11 @@ import CustomHeader from '@/components/CustomHeader/CustomHeader';
 import { useSelector } from 'react-redux';
 import { BookingInfo } from '@/types/bookingInfo';
 import { FC } from 'react';
-import { selectReservationsMemoized } from '@/redux/selectors/reservationSelector';
+import { selectReservations } from '@/redux/selectors/reservationSelector';
+import { RootState } from '@/redux/store';
 
 const BookingsScreen: FC = () => {
-  const travelerReservations: BookingInfo[] = useSelector(selectReservationsMemoized);
+  const travelerReservations: BookingInfo[] = useSelector((state: RootState) => selectReservations(state));
 
   return (
     <View style={styles.mainContainer}>
