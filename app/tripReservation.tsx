@@ -20,6 +20,8 @@ import { MenuResponse } from '@/types/httpsResponses';
 import { MenuInfo } from '@/types/menuInfo';
 import { selectMenuItems } from '@/utils/menu.utils';
 import MenuCard from '@/components/Menu Card/MenuCard';
+import { useDispatch } from 'react-redux';
+import { addTravelerReservation } from '@/redux/reducers/reservationsReducer';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -40,6 +42,8 @@ const PlanetSelectionScreen: FC = () => {
   const [showMenuModal, setShowMenuModal] = useState(false);
   const [menuToShow, setMenuToShow] = useState<MenuInfo[]>([]);
 
+  const dispatch = useDispatch();
+
   const handleChange = (name: keyof BookingInfo, value: string | Date | boolean) => {
     setFormData(prevState => ({
       ...prevState,
@@ -53,7 +57,7 @@ const PlanetSelectionScreen: FC = () => {
       setShowMenuModal(true);
       return;
     }
-    console.log(formData);
+    dispatch(addTravelerReservation(formData));
   };
 
   const handleOnCloseModal = () => {
