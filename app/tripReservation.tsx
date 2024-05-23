@@ -22,6 +22,7 @@ import { selectMenuItems } from '@/utils/menu.utils';
 import MenuCard from '@/components/Menu Card/MenuCard';
 import { useDispatch } from 'react-redux';
 import { addTravelerReservation } from '@/redux/reducers/reservationsReducer';
+import { generateUUID } from '@/utils/id.utils';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -57,7 +58,9 @@ const PlanetSelectionScreen: FC = () => {
       setShowMenuModal(true);
       return;
     }
-    dispatch(addTravelerReservation(formData));
+    const newId = generateUUID();
+    const updatedFormData = { ...formData, id: newId };
+    dispatch(addTravelerReservation(updatedFormData));
   };
 
   const handleOnCloseModal = () => {
