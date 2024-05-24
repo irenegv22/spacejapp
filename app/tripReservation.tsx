@@ -26,6 +26,7 @@ import { generateUUID } from '@/utils/id.utils';
 import { router } from 'expo-router';
 import { handleEnableButton } from '@/utils/reservation.utils';
 import { reservationSuccessAlert } from '@/alers/reservationSuccess';
+import IosDatePicker from '@/components/DatePicker/IosDatePicker';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -161,6 +162,12 @@ const PlanetSelectionScreen: FC = () => {
             <View style={styles.formGroup}>
               <Text style={styles.lable}>Fecha de salida</Text>
               <DatePicker value={formData.tripDate} onChange={date => handleChange('tripDate', date)} />
+            </View>
+          )}
+          {Platform.OS === 'ios' && (
+            <View style={styles.formGroup}>
+              <Text style={styles.lable}>Fecha de salida</Text>
+              <IosDatePicker />
             </View>
           )}
           <View style={styles.formGroup}>

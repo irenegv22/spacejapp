@@ -4,7 +4,6 @@ import globalStyles, { horizontalPadding } from '@/constants/GlobalStyles';
 import { router } from 'expo-router';
 import typos from '@/constants/Typos';
 import CustomButton from '@/components/CustomButton/CustomButton';
-import Colors from '@/constants/Colors';
 
 const HomeScreen: FC = () => {
   const handleOnPress = () => {
