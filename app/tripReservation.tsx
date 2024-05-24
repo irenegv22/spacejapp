@@ -23,6 +23,9 @@ import MenuCard from '@/components/Menu Card/MenuCard';
 import { useDispatch } from 'react-redux';
 import { addTravelerReservation } from '@/redux/reducers/reservationsReducer';
 import { generateUUID } from '@/utils/id.utils';
+import { router } from 'expo-router';
+import { handleEnableButton } from '@/utils/reservation.utils';
+import { reservationSuccessAlert } from '@/alers/reservationSuccess';
 
 const formInitialValue: BookingInfo = {
   id: '',
@@ -61,6 +64,7 @@ const PlanetSelectionScreen: FC = () => {
     const newId = generateUUID();
     const updatedFormData = { ...formData, id: newId };
     dispatch(addTravelerReservation(updatedFormData));
+    reservationSuccessAlert(() => router.push({ pathname: 'bookings' }));
   };
 
   const handleOnCloseModal = () => {
@@ -183,6 +187,7 @@ const PlanetSelectionScreen: FC = () => {
           <CustomButton
             lable={formData.menuChoice === '' ? 'Elegir Menú' : 'Reservar'}
             onPress={handleFinishReservation}
+            disabled={handleEnableButton(formData)}
           />
         </View>
       </ScrollView>
