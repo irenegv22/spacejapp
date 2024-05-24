@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
   titleText: {
     ...typos.bodyOne,
     marginBottom: 16,
-    color: Colors.Main100,
     marginTop: 70,
   },
   introductionText: {
